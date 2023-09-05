@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <title>IP Tracker APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+      crossorigin=""
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <section id="cont-image">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12 text-center mt-4 p-5">
+            <h1>IP Address Tracker</h1>
+            <div class="cont-input">
+              <input
+                type="search"
+                class="form-control w-100 m-auto mt-3 input-field"
+                placeholder="Search for any IP address or domain"
+              />
+              <div class="cont-arrow">
+                <button type="submit" class="submit-btn">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="cont-info">
+      <div class="container mt-3 bg-light p-4">
+        <div class="row">
+          <div
+            class="col-md-8 m-auto d-flex justify-content-between cont-items"
+          >
+            <div class="ip">
+              <h2>IP ADDRESS</h2>
+              <p class="ipAddressField">197.52.55.199</p>
+            </div>
+            <div class="line"></div>
+            <div class="location">
+              <h2>LOCATION</h2>
+              <p class="locationInput">egyot</p>
+            </div>
+            <div class="line"></div>
+            <div class="timezone">
+              <h2>TIMEZONE</h2>
+              <p class="timezoneInput">UTC</p>
+            </div>
+            <div class="line"></div>
+            <div class="isp">
+              <h2>ISP</h2>
+              <p class="ispInput">TE-AS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="map-section">
+      <div id="map"></div>
+    </section>
+    <script
+      src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+      integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+      crossorigin=""
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

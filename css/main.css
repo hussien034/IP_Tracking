@@ -1,0 +1,86 @@
+body{
+    font-family: 'Shantell Sans', cursive;
+}
+#cont-image{
+    height: 30vh;
+    width: 100%;
+    background-image: url('../image/pattern-bg.png');
+    background-size: 100% 100%;
+}
+.cont-input{
+    width: 25%;
+    margin: auto;
+    position: relative !important;
+    top: 0;
+    left: 0;
+}
+h1{
+    color: white;
+}
+input{
+    padding:15px 10px !important;
+    border-radius: 10px !important;
+}
+
+.cont-arrow{
+    position: absolute !important;
+    top:15px;
+    bottom: 0;
+    left:90%;
+}
+
+button{
+    border: 0;
+}
+#cont-info{
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    z-index: 66666;
+}
+.line{
+    border-right:2px solid black;
+    height: 70%;
+    margin-top: 10px;
+}
+#map{
+    height:80vh;
+    position: relative;
+    z-index: 0;
+}
+h2{
+    font-size:18px;
+    color: #AFAFAF;
+    text-align: center;
+}
+p{
+    font-size: 25px;
+}
+@media all and (min-width:280px) and (max-width:1000px){
+    .cont-input{
+        width: 50% !important;
+    }
+    .cont-input input{
+        width: 100% !important;
+    }
+    .cont-arrow{
+        position: absolute !important;
+        top:15px;
+        bottom: 0;
+        left:80%;
+    }
+    .cont-items{
+        display: block !important;
+        text-align: center;
+    }
+    #cont-info{
+        position: absolute;
+        top: 26%;
+        width: 50%;
+        left: 25%;
+        z-index: 66666;
+    }
+    p{
+        font-size: 20px;
+    }
+}
