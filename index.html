@@ -23,59 +23,65 @@
     />
   </head>
   <body>
-    <section id="cont-image">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12 text-center mt-4 p-5">
-            <h1>IP Address Tracker</h1>
-            <div class="cont-input">
+    <main class="app-shell">
+      <header class="hero">
+        <div class="container hero__content">
+          <span class="eyebrow">Global IP Insights</span>
+          <h1>Track any IP address in real time</h1>
+          <p class="hero__subtitle">
+            Locate a device, verify provider information, and explore network
+            location on a live map.
+          </p>
+
+          <form id="ip-search-form" class="search-form" novalidate>
+            <div class="input-group">
               <input
+                id="ip-search-input"
                 type="search"
-                class="form-control w-100 m-auto mt-3 input-field"
+                class="form-control input-field"
                 placeholder="Search for any IP address or domain"
+                aria-label="Search for any IP address or domain"
               />
-              <div class="cont-arrow">
-                <button type="submit" class="submit-btn">
-                  <i class="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
+              <button type="submit" class="submit-btn" aria-label="Search">
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+            <small id="search-feedback" class="form-message" aria-live="polite">
+              Enter an IPv4 address or a domain name.
+            </small>
+          </form>
+        </div>
+      </header>
+
+      <section id="cont-info" aria-label="IP information panel">
+        <div class="container info-panel">
+          <div class="row">
+            <div class="col-md-10 m-auto cont-items">
+              <article class="info-card">
+                <h2>IP ADDRESS</h2>
+                <p class="ipAddressField">--</p>
+              </article>
+              <article class="info-card">
+                <h2>LOCATION</h2>
+                <p class="locationInput">--</p>
+              </article>
+              <article class="info-card">
+                <h2>TIMEZONE</h2>
+                <p class="timezoneInput">UTC</p>
+              </article>
+              <article class="info-card">
+                <h2>ISP</h2>
+                <p class="ispInput">--</p>
+              </article>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section id="cont-info">
-      <div class="container mt-3 bg-light p-4">
-        <div class="row">
-          <div
-            class="col-md-8 m-auto d-flex justify-content-between cont-items"
-          >
-            <div class="ip">
-              <h2>IP ADDRESS</h2>
-              <p class="ipAddressField">197.52.55.199</p>
-            </div>
-            <div class="line"></div>
-            <div class="location">
-              <h2>LOCATION</h2>
-              <p class="locationInput">egyot</p>
-            </div>
-            <div class="line"></div>
-            <div class="timezone">
-              <h2>TIMEZONE</h2>
-              <p class="timezoneInput">UTC</p>
-            </div>
-            <div class="line"></div>
-            <div class="isp">
-              <h2>ISP</h2>
-              <p class="ispInput">TE-AS</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="map-section">
-      <div id="map"></div>
-    </section>
+      </section>
+
+      <section class="map-section" aria-label="Map section">
+        <div id="map"></div>
+      </section>
+    </main>
     <script
       src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
       integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
