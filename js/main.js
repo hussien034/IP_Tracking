@@ -30,18 +30,21 @@ const setFeedback = (message, isError = false) => {
 }
 
 const updateLocationData = (response) => {
-  const ipAddress = response.query || 'N/A'
-  const timeZone = response.timezone || 'N/A'
-  const countryLocation = response.country || 'Unknown'
+  const ipAddress = response.ip || 'N/A'
+  const timeZone = response.timezone || response.utc_offset || 'N/A'
+  const countryLocation = response.country_name || response.country || 'Unknown'
   const cityLocation = response.city || 'Unknown'
-  const postalCode = response.zip || ''
-  const isp = response.isp || 'N/A'
-  const lat = response.lat || 0
-  const lng = response.lon || 0
+  const regionLocation = response.region || ''
+  const postalCode = response.postal || ''
+  const isp = response.org || response.isp || 'N/A'
+  const lat = response.latitude || 0
+  const lng = response.longitude || 0
 
   ipAddressField.textContent = ipAddress
   timezoneInput.textContent = timeZone
-  countryLocationInput.textContent = `${countryLocation}, ${cityLocation}${postalCode ? ` ${postalCode}` : ''}`
+  countryLocationInput.textContent = [countryLocation, cityLocation, regionLocation, postalCode]
+    .filter(Boolean)
+    .join(', ')
   ispInput.textContent = isp
 
   if (lat && lng) {
@@ -49,32 +52,52 @@ const updateLocationData = (response) => {
   }
 }
 
-const fetchGeoData = (query) => {
+const resolveDomainToIp = async (domain) => {
+  const response = await fetch(`https://dns.google/resolve?name=${encodeURIComponent(domain)}`)
+
+  if (!response.ok) {
+    throw new Error('Unable to resolve domain')
+  }
+
+  const data = await response.json()
+  const answerRecord = (data.Answer || []).find((item) => item.type === 'A')
+
+  if (!answerRecord) {
+    throw new Error('No A record found for this domain')
+  }
+
+  return answerRecord.data
+}
+
+const fetchGeoData = async (query) => {
   const normalizedQuery = query.trim()
-  const url = normalizedQuery
-    ? `http://ip-api.com/json/${encodeURIComponent(normalizedQuery)}`
-    : 'http://ip-api.com/json'
 
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Request failed')
-      }
-      return response.json()
-    })
-    .then((response) => {
-      if (response.status !== 'success') {
-        throw new Error('Invalid query')
-      }
+  try {
+    let targetQuery = normalizedQuery
 
-      updateLocationData(response)
-      if (normalizedQuery) {
-        setFeedback('Location updated successfully.')
-      }
-    })
-    .catch(() => {
-      setFeedback('Unable to fetch data for that query. Please try again.', true)
-    })
+    if (isValidDomainName(normalizedQuery)) {
+      targetQuery = await resolveDomainToIp(normalizedQuery)
+    }
+
+    const url = targetQuery
+      ? `https://ipapi.co/${encodeURIComponent(targetQuery)}/json/`
+      : 'https://ipapi.co/json/'
+
+    const response = await fetch(url)
+
+    if (!response.ok) {
+      throw new Error('Request failed')
+    }
+
+    const data = await response.json()
+    updateLocationData(data)
+
+    if (normalizedQuery) {
+      setFeedback('Location updated successfully.')
+    }
+  } catch (error) {
+    setFeedback('Unable to fetch data for that query. Please try again.', true)
+  }
 }
 
 const mapLocation = (lat, lng) => {
